@@ -17,7 +17,7 @@ public class GdxUtils {
     public static void clearScreen(){//default clearScreen()
         //first clear screen
         //these two lines are needed to clear the screen
-        Gdx.gl.glClearColor(0, 0, 0, 1.0f);//makes screen black
+        Gdx.gl.glClearColor(135/255f, 206/255f, 235/255f, 1.0f);//makes screen black
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 

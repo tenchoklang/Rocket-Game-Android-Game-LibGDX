@@ -38,6 +38,7 @@ public class Player {
     }
 
     public void update(){
+        draw();
         float tempSpeed = 0;
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
             tempSpeed = -moveSpeedX;
@@ -47,7 +48,6 @@ public class Player {
 
         positionX += tempSpeed;
         setPosition(positionX, positionY);
-        draw();
     }
 
     public void updatePlayer(){
