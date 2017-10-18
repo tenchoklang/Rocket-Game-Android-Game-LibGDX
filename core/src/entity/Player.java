@@ -43,13 +43,17 @@ public class Player {
         float tempSpeedY = 0;
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
             tempSpeedX = -moveSpeedX;
-        }else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
             tempSpeedX = moveSpeedX;
-        } else  if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-            tempSpeedY = -moveSpeedX;
-        }else if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.UP)){
             tempSpeedY = moveSpeedX;
         }
+        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+            tempSpeedY = -moveSpeedX;
+        }
+
         positionX += tempSpeedX;
         positionY += tempSpeedY;
         setPosition(positionX, positionY);
@@ -76,8 +80,6 @@ public class Player {
 
         return playerSizeX;
     }
-
-
 
 
 
