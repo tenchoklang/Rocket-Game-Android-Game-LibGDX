@@ -39,14 +39,19 @@ public class Player {
 
     public void update(){
         draw();
-        float tempSpeed = 0;
+        float tempSpeedX = 0;
+        float tempSpeedY = 0;
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-            tempSpeed = -moveSpeedX;
+            tempSpeedX = -moveSpeedX;
         }else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-            tempSpeed = moveSpeedX;
+            tempSpeedX = moveSpeedX;
+        } else  if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+            tempSpeedY = -moveSpeedX;
+        }else if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            tempSpeedY = moveSpeedX;
         }
-
-        positionX += tempSpeed;
+        positionX += tempSpeedX;
+        positionY += tempSpeedY;
         setPosition(positionX, positionY);
     }
 
