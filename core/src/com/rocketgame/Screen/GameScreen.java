@@ -4,11 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -16,6 +14,7 @@ import com.rocketgame.config.GameConfig;
 import com.rocketgame.util.GdxUtils;
 import com.rocketgame.util.ViewportUtils;
 
+import entity.Player2;
 import entity.Player;
 
 /**
@@ -31,9 +30,12 @@ public class GameScreen implements Screen {
     private Viewport viewport;
     private ShapeRenderer renderer;
     private Texture texture;
+    private Texture texture2;
+
     private SpriteBatch batch;
 
     private Player player;
+    private Player2 player2;
 
     private float obstacleTimer;//0 by default
 
@@ -43,10 +45,13 @@ public class GameScreen implements Screen {
         viewport = new FitViewport(GameConfig.WORLD_WIDTH, GameConfig.WORLD_HEIGHT, camera);
         renderer = new ShapeRenderer();
 
-        texture = new Texture(Gdx.files.internal("character.png"));
+        texture = new Texture(Gdx.files.internal("Jet.png"));
+        texture2 = new Texture(Gdx.files.internal("Jet.png"));
+
         batch = new SpriteBatch();
 
         player = new Player(batch,texture);
+        player2 = new Player2(batch, texture2);
 
     }
 
@@ -69,14 +74,19 @@ public class GameScreen implements Screen {
     }
 
     private void worldBoundry(){
-        float playerX = MathUtils.clamp(player.getX(), 0, GameConfig.WORLD_WIDTH - player.getDiameter() );//(value, clamp value minimum, clamp value max)
-        //basically value must be between minimum and maximum
-
-        float playerY = MathUtils.clamp(player.getY(), 0,GameConfig.WORLD_HEIGHT - player.getDiameter());
+        //(value, clamp value minimum, clamp value max)basically value must be between minimum and maximum
+        float playerX = MathUtils.clamp(player.getX(), 0, GameConfig.WORLD_WIDTH - player.getDiameter() );
+        float playerY = MathUtils.clamp(player.getY(), 0, (GameConfig.WORLD_HEIGHT/2) - player.getDiameter());
         player.setPosition(playerX, playerY);
+
+        //(value, clamp value minimum, clamp value max) basically value must be between minimum and maximum
+        float player2X = MathUtils.clamp(player2.getX(), 0, GameConfig.WORLD_WIDTH - player2.getDiameter() );
+        float player2Y = MathUtils.clamp(player2.getY(), (GameConfig.WORLD_HEIGHT/2),GameConfig.WORLD_HEIGHT - player2.getDiameter());
+        player2.setPosition(player2X, player2Y);
     }
 
     private void update(){
+        player2.update();
         player.update();
     }
 

@@ -11,48 +11,63 @@ import com.rocketgame.config.GameConfig;
  * Created by tench on 10/14/2017.
  */
 
-public class Player {
-
-    private float startPositionX = GameConfig.WORLD_WIDTH/2;
-    private float startPostionY = 1;
+public class Player2 {
 
     private float playerSizeX = 1.5f;
     private float playerSizeY = 1.5f;
 
-    private float positionX = GameConfig.WORLD_WIDTH/2 - playerSizeX/2;
-    private float positionY =1f - playerSizeY/2;
+    private float startPositionX = GameConfig.WORLD_WIDTH/2 - playerSizeX/2;
+    private float startPostionY = GameConfig.WORLD_HEIGHT - playerSizeY/2;
+
+    private float positionX;
+    private float positionY;
 
     private float moveSpeedX = .15f;
 
     private SpriteBatch batch;
     private Texture texture;
 
-    public Player(SpriteBatch batch, Texture texture){
+    public Player2(SpriteBatch batch, Texture texture){
         this.batch = batch;
         this.texture = texture;
+
+        positionX = startPositionX;
+        positionY = startPostionY;
     }
 
 
     private void draw(){
         //update();
-        batch.setColor(Color.GREEN);
-        batch.draw(texture, positionX,positionY,playerSizeX,playerSizeY);
+       // oldColor.set(batch.getColor());//store previous batches color
+
+        batch.setColor(Color.BLUE);//set it to a new color
+        batch.draw(texture,
+                positionX,positionY,
+                playerSizeX,playerSizeY,
+                0,0,
+                texture.getWidth(), texture.getHeight(),
+                false, true);
+
+       // batch.setColor(oldColor);//set it back to old color
+
     }
+
+
 
     public void update(){
         draw();
         float tempSpeedX = 0;
         float tempSpeedY = 0;
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+        if(Gdx.input.isKeyPressed(Input.Keys.A)){
             tempSpeedX = -moveSpeedX;
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+        if(Gdx.input.isKeyPressed(Input.Keys.D)){
             tempSpeedX = moveSpeedX;
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.UP)){
+        if(Gdx.input.isKeyPressed(Input.Keys.W)){
             tempSpeedY = moveSpeedX;
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+        if(Gdx.input.isKeyPressed(Input.Keys.S)){
             tempSpeedY = -moveSpeedX;
         }
 
