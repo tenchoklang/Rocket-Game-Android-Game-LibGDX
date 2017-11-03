@@ -35,7 +35,7 @@ public class Player {
 
     private void draw(){
         //update();
-        batch.setColor(Color.GREEN);
+        //batch.setColor(Color.GREEN);
         batch.draw(texture, positionX,positionY,playerSizeX,playerSizeY);
     }
 
